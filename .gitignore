@@ -1,0 +1,12 @@
+# device environment folders
+**/DevEnv
+
+# git automation files
+gitpull.bat
+gitpush.bat
+
+# logs folders
+**/logs
+
+# output folders
+**/output
