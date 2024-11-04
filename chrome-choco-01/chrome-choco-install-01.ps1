@@ -6,7 +6,7 @@
 
 <#
 .SYNOPSIS
-Deploy latest version of Google Chrome using (first installing) the Chocolatey package manager.
+Install latest version of Google Chrome using (first installing) the Chocolatey package manager.
 
 .DESCRIPTION
 Executes the Chocolatey installation script directly from the Internet, then uses Chocolatey to install the latest version of Google Chrome.
@@ -22,14 +22,14 @@ Not mandatory. A boolean option to first remove/replace detected Program Files (
  Purpose/change: initial creation
  Documentation:
    chrome-ps-pgm-proc-rvw-01.docx
-   itmad-dev GitHub repo chrome-ps-pgm-01\chrome-choco-01\chrome-choco-01.ps1
+   itmad-dev GitHub repo chrome-ps-pgm-01\chrome-choco-01\chrome-choco-install-01.ps1
 
 .EXAMPLE
 
-run chrome-choco-01.bat from or-jmpwin-02 from org prescribed central script location
+run chrome-choco-install-01.bat from or-jmpwin-02 from org prescribed central script location
 
-  chrome-choco-01.bat
-    powershell.exe -command "Set-ExecutionPolicy Bypass -Scope Process -Force;. %~dp0\chrome-choco-01.ps1"
+  chrome-choco-install-01.bat
+    powershell.exe -command "Set-ExecutionPolicy Bypass -Scope Process -Force;. %~dp0\chrome-choco-install-01.ps1"
 
 #>
 #------------------------------[Parameters]------------------------------

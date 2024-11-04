@@ -1,0 +1,1 @@
+powershell.exe -command ". %~dp0\chrome-choco-uninstall-01.ps1"
