@@ -1,1 +1,0 @@
-powershell.exe -command ". %~dp0\chrome-remove-01.ps1"
