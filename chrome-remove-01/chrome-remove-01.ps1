@@ -26,19 +26,9 @@ Searches the local Windows device for WMI objects with "Google Chrome" in the na
 run chrome-remove-01.bat from or-jmpwin-02 from org prescribed central script location
 
   chrome-remove-01.bat
-    powershell.exe -command "Set-ExecutionPolicy Bypass -Scope Process -Force;. %~dp0\chrome-choco-01.ps1"
-
-
-$Chrome = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Google Chrome*" } 
-
-foreach ($Product in $Chrome) { 
-
-    $Product.Uninstall() 
+    powershell.exe -command . %~dp0\chrome-remove-01.ps1"
 
 } 
-
-Write-Output "Google Chrome successfully uninstalled" 
-
 
 #>
 #------------------------------[Parameters]------------------------------
@@ -56,6 +46,8 @@ $script:strScriptVersion = '1.0'
 #Date Time format
 $script:strDate = (get-date).ToString("MMddyyyy_HHmm")
 
+#Arrays
+$script:arrChrome = @()
 
 #------------------------------[Functions]------------------------------
 
@@ -68,13 +60,18 @@ Function Uninstall-GoogleChromeWithWMI {
 
   Process {
     Try {
-        $arrChrome = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Google Chrome*" }
-        foreach ($objChrome in $arrChrome) {
-            $objChrome.Uninstall()
-        } 
-
+        $script:arrChrome = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Google Chrome" }
+        if ($script:arrChrome.Count -ne 0) {
+            foreach ($objChrome in $script:arrChrome) {
+                Write-Host "Uninstalling Google Chrome"
+                $uninstallResult = $objChrome.Uninstall() > $null
+                $test = $uninstallResult
+                Write-Host "Google Chrome uninstalled successfully"
+            }
+        } else {
+            Write-Host "Google Chrome not found"
+        }
     }
-
     Catch {
       # Write-LogError -LogPath $script:strLogFile -Message $_.Exception -ExitGracefully
       Break
