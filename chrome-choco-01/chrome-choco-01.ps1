@@ -6,7 +6,7 @@
 
 <#
 .SYNOPSIS
-Deploy latest version of Google Chrome using (first installing) the Chocolatey pagkage manager.
+Deploy latest version of Google Chrome using (first installing) the Chocolatey package manager.
 
 .DESCRIPTION
 Executes the Chocolatey installation script directly from the Internet, then uses Chocolatey to install the latest version of Google Chrome.

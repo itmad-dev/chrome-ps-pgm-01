@@ -29,6 +29,18 @@ Not mandatory. A boolean option to first remove/replace detected Program Files (
 or-jmpwin-02 from org prescribed central script location
  .\chrome-choco-01.ps1
 
+
+$Chrome = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Google Chrome*" } 
+
+foreach ($Product in $Chrome) { 
+
+    $Product.Uninstall() 
+
+} 
+
+Write-Output "Google Chrome successfully uninstalled" 
+
+
 #>
 #------------------------------[Parameters]------------------------------
 [CmdletBinding()]
