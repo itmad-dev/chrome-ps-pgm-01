@@ -23,8 +23,10 @@ Searches the local Windows device for WMI objects with "Google Chrome" in the na
 
 .EXAMPLE
 
-or-jmpwin-02 from org prescribed central script location
- .\chrome-remove-01.ps1
+run chrome-remove-01.bat from or-jmpwin-02 from org prescribed central script location
+
+  chrome-remove-01.bat
+    powershell.exe -command "Set-ExecutionPolicy Bypass -Scope Process -Force;. %~dp0\chrome-choco-01.ps1"
 
 
 $Chrome = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Google Chrome*" } 
@@ -46,8 +48,6 @@ Write-Output "Google Chrome successfully uninstalled"
 
 # Runtime IDE session prepped with Set-ExecutionPolicy Bypass -Scope Process -Force
 
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-
 #------------------------------[Declarations]------------------------------
 
 #Script Version
@@ -59,49 +59,19 @@ $script:strDate = (get-date).ToString("MMddyyyy_HHmm")
 
 #------------------------------[Functions]------------------------------
 
-Function Install-Chocolatey {
+Function Uninstall-GoogleChromeWithWMI {
 
   Begin {
-  #  Write-LogInfo -LogPath $script:strLogFile -Message "Installing Chocolatey ..."
+  #  Write-LogInfo -LogPath $script:strLogFile -Message "Uninstalling Google Chrome with WMI ..."
 
   }
 
   Process {
     Try {
-      $objChoco = Get-Command -Name choco.exe -ErrorAction SilentlyContinue
-      If ($objChoco -eq $null) {
-        iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-      } else {
-        Write-Host "Chocolatey already installed"
-      }
-         
-    }
-
-    Catch {
-      # Write-LogError -LogPath $script:strLogFile -Message $_.Exception -ExitGracefully
-      Break
-    }
-  }
-
-  End {
-    If ($?) {
-      # Write-LogInfo -LogPath $script:strLogFile -Message 'Completed Successfully.'
-      # Write-LogInfo -LogPath $script:strLogFile -Message ' '
-    }
-  }
-}
-
-
-Function Install-GoogleChromeWithChocolatey {
-
-  Begin {
-  #  Write-LogInfo -LogPath $script:strLogFile -Message "Installing Google Chrome with Chocolatey ..."
-
-  }
-
-  Process {
-    Try {
-          choco install googlechrome -y
+        $arrChrome = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Google Chrome*" }
+        foreach ($objChrome in $arrChrome) {
+            $objChrome.Uninstall()
+        } 
 
     }
 
@@ -123,10 +93,8 @@ Function Install-GoogleChromeWithChocolatey {
 
 # Script setup settings
 # Start-Log -LogPath $script:strLogPath -LogName $script:strLogFileName -ScriptVersion $strScriptVersion
-# Install Chocolatey 
-Install-Chocolatey
-# Install Google Chrome with Chocolatey
-Install-GoogleChromeWithChocolatey
+# Uninstall Google Chrome with WMI
+Uninstall-GoogleChromeWithWMI
 # Script teardown settings
 # Stop-Log -LogPath $strLogFile
 Remove-Variable * -ErrorAction SilentlyContinue
