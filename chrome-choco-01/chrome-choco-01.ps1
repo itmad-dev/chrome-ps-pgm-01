@@ -26,8 +26,10 @@ Not mandatory. A boolean option to first remove/replace detected Program Files (
 
 .EXAMPLE
 
-or-jmpwin-02 from org prescribed central script location
- .\chrome-choco-01.ps1
+run chrome-choco-01.bat from or-jmpwin-02 from org prescribed central script location
+
+  chrome-choco-01.bat
+    powershell.exe -command "Set-ExecutionPolicy Bypass -Scope Process -Force;. %~dp0\chrome-choco-01.ps1"
 
 #>
 #------------------------------[Parameters]------------------------------
@@ -38,7 +40,8 @@ param(
 )
 #------------------------------[Initializations]------------------------------
 
-Set-ExecutionPolicy Bypass -Scope Process -Force
+# Runtime IDE session prepped with Set-ExecutionPolicy Bypass -Scope Process -Force
+
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
 
 #------------------------------[Declarations]------------------------------

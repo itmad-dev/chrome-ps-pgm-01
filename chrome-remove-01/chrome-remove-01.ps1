@@ -6,13 +6,10 @@
 
 <#
 .SYNOPSIS
-Remove any installed version of Google Chrome using (first installing) the Chocolatey pagkage manager.
+Remove any installed version of Google Chrome using WMI (Windows Management Instrumentation).
 
 .DESCRIPTION
-Executes the Chocolatey installation script directly from the Internet, then uses Chocolatey to install the latest version of Google Chrome.
-
-.PARAMETER 32bitLegacyReplace
-Not mandatory. A boolean option to first remove/replace detected Program Files (x86) legacy deployment of Google Chrome program executble. The latest version of Google Chrome will then be installed in the proper Program Files location.
+Searches the local Windows device for WMI objects with "Google Chrome" in the name, then uses WMI to install the latest version of Google Chrome.
 
 
 .NOTES
@@ -22,12 +19,12 @@ Not mandatory. A boolean option to first remove/replace detected Program Files (
  Purpose/change: initial creation
  Documentation:
    chrome-ps-pgm-proc-rvw-01.docx
-   itmad-dev GitHub repo chrome-ps-pgm-01\chrome-choco-01\chrome-choco-01.ps1
+   itmad-dev GitHub repo chrome-ps-pgm-01\chrome-remove-01\chrome-remove-01.ps1
 
 .EXAMPLE
 
 or-jmpwin-02 from org prescribed central script location
- .\chrome-choco-01.ps1
+ .\chrome-remove-01.ps1
 
 
 $Chrome = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Google Chrome*" } 
@@ -43,14 +40,12 @@ Write-Output "Google Chrome successfully uninstalled"
 
 #>
 #------------------------------[Parameters]------------------------------
-[CmdletBinding()]
-param(
-    [Parameter(Mandatory=$False, ParameterSetName="baseParams")]
-    [bool]$32bitLegacyReplace
-)
+
+
 #------------------------------[Initializations]------------------------------
 
-Set-ExecutionPolicy Bypass -Scope Process -Force
+# Runtime IDE session prepped with Set-ExecutionPolicy Bypass -Scope Process -Force
+
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
 
 #------------------------------[Declarations]------------------------------
