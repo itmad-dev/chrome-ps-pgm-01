@@ -6,10 +6,10 @@
 
 <#
 .SYNOPSIS
-Install latest version of Google Chrome using (first installing) the Chocolatey package manager.
+Install latest version of Google Chrome using (first installing, if not present) the Chocolatey package manager.
 
 .DESCRIPTION
-Executes the Chocolatey installation script directly from the Internet, then uses Chocolatey to install the latest version of Google Chrome.
+Detects installed instance of Chocolatey package manager, if necessary executes the Chocolatey installation script directly from the Internet, then uses Chocolatey to install the latest version of Google Chrome.
 
 .PARAMETER 32bitLegacyReplace
 Not mandatory. A boolean option to first remove/replace detected Program Files (x86) legacy deployment of Google Chrome program executble. The latest version of Google Chrome will then be installed in the proper Program Files location.
