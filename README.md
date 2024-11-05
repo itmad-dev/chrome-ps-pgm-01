@@ -10,5 +10,9 @@
 
 ##### Preliminary script use cases  
 ##### chrome-cdn-01  
+Client direct access to CDN location  
+Minimal customization  
+Runtime log strategy  
+- 
 
 
