@@ -12,7 +12,11 @@
 ##### chrome-cdn-01  
 Client direct access to CDN location  
 Minimal customization  
-Runtime log strategy  
-- 
+Runtime log strategy (native? custom/central?)  
 
+##### chrome-choco-01  
+Use package manager (streamlined lifecycle options)  
+Client direct access to package manager deployment    
+Advanced customization through package manager  
+Runtime log strategy (native? custom/central?)  
 
