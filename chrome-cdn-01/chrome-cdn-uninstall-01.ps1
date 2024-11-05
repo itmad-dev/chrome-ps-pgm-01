@@ -30,18 +30,6 @@ run chrome-cdn-uinstall-01.bat from or-jmpwin-02 from org prescribed central scr
 
 } 
 
-        $script:arrChrome = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "Google Chrome" }
-        if ($script:arrChrome.Count -ne 0) {
-            foreach ($objChrome in $script:arrChrome) {
-                Write-Host "Uninstalling Google Chrome"
-                $uninstallResult = $objChrome.Uninstall() > $null
-                $test = $uninstallResult
-                Write-Host "Google Chrome uninstalled successfully"
-            }
-        } else {
-            Write-Host "Google Chrome not found"
-        }
-
 #>
 #------------------------------[Parameters]------------------------------
 
