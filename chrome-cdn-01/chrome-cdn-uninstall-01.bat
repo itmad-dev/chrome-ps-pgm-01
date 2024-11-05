@@ -1,0 +1,1 @@
+powershell.exe -command "Set-ExecutionPolicy Bypass -Scope Process -Force;. %~dp0\chrome-cdn-install-01.ps1"
