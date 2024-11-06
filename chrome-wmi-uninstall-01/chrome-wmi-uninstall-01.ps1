@@ -64,7 +64,6 @@ Function Uninstall-GoogleChromeWithWMI {
             foreach ($objChrome in $script:arrChrome) {
                 Write-Host "Uninstalling Google Chrome"
                 $uninstallResult = $objChrome.Uninstall() > $null
-                $test = $uninstallResult
                 Write-Host "Google Chrome uninstalled successfully"
             }
         } else {
